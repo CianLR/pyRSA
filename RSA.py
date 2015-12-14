@@ -6,13 +6,16 @@ class RSA:
     def extended_euclidean(self, totn, prime):
         return
 
+    def OAEP(self, message):
+        return
+    
     def gen_primes(self, bits):
         return
 
     def encrypt(self, message):
         return
 
-    def decrype(self, cypher):
+    def decrypt(self, cypher):
         return
 
     def get_public_key(self):
