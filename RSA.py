@@ -4,6 +4,7 @@ class RSA:
     def __init__(self, bits, RMiterations=64):
         self.random = SystemRandom()
         self.RMi = RMiterations
+        self.bits = bits
     
     def extended_euclidean(self, totn, prime):
         return
@@ -43,8 +44,22 @@ class RSA:
     def OAEP(self, message):
         return
     
-    def gen_primes(self, bits):
-        return
+    def gen_primes(self):
+        max_number = 2**self.bits
+        
+        p = self.random.randint(2,max_number)
+        if not p%2:
+            p -= 1 #Ensure p is odd
+        while not self.rabin_miller_primality_test(p, self.RMi):
+            p += 2
+
+        q = self.random.randint(2,max_number)
+        if not q%2:
+            q -= 1 #Ensure q is odd
+        while not self.rabin_miller_primality_test(q, self.RMi):
+            q += 2 
+        
+        return (p,q)
 
     def encrypt(self, message):
         return
