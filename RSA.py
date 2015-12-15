@@ -5,9 +5,54 @@ class RSA:
         self.random = SystemRandom()
         self.RMi = RMiterations
         self.bits = bits
+
+        p, q = self.gen_primes()
+        self.n = p*q
+        
+        totient = (p-1) * (q-1) 
+        self.public_key = 65537
+
+        print totient
+        
+    def extended_euclidean(self, n, x):
+        n_for_mod = n
+        p0 = 0
+        p1 = 1
+
+        q0 = n / x
+        n_mod_x = n % x
+        
+        n = x
+        x = n_mod_x
+        n_mod_x = n % x
+        q1 = n / x
+        print q1
+
+        while n_mod_x != 0:
+            temp = p0 - p1*(q0%n_for_mod)
+            p0 = p1
+            p1 = temp
+
+            n = x
+            x = n_mod_x
+            n_mod_x = n % x
+            q0 = q1
+            q1 = n / x
+            print q1, p1
+
+        temp = p0 - p1*(q0%n_for_mod)
+        p0 = p1
+        p1 = temp
+
+        n = x
+        x = n_mod_x
+        n_mod_x = n % x
+        q0 = q1
+        q1 = n / x
+        print q1, p1
     
-    def extended_euclidean(self, totn, prime):
-        return
+        return p0 - p1*(q0%n_for_mod)
+            
     
     def rabin_miller_primality_test(self, n, iterations):
 
