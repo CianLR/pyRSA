@@ -1,14 +1,14 @@
 from random import SystemRandom
 
 class RSA:
-    def __init__(self, bits):
+    def __init__(self, bits, RMiterations=64):
         self.random = SystemRandom()
-        return
+        self.RMi = RMiterations
     
     def extended_euclidean(self, totn, prime):
         return
     
-    def miller_rabin_primality_test(self, n, iterations):
+    def rabin_miller_primality_test(self, n, iterations):
 
         #Break n-1 into 2^r * d where d is odd
         r = 0
