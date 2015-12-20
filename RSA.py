@@ -12,7 +12,6 @@ class RSA:
         totient = (p-1) * (q-1) 
         self.public_key = 65537
         self.private_key = self.extended_euclidean(totient, self.public_key)
-        #print totient
         
     def extended_euclidean(self, totient, p):
         '''
@@ -82,6 +81,11 @@ class RSA:
         return (p,q)
 
     def encrypt(self, message, pub_key, n):
+        if type(message) != int:
+            raise TypeError('Message must be an integer')
+        elif message > n:
+            raise ValueError('Message is too large to encrypt')
+        
         return pow(message, pub_key, n)
 
     def decrypt(self, cypher):
