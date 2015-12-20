@@ -16,7 +16,7 @@ class RSA:
         
     def extended_euclidean(self, totient, p):
         '''
-        Returns the multiplicative inverse of p wrt n.
+        Returns the multiplicative inverse of p wrt totient.
         Adapted from: https://goo.gl/Zyh7T1
         '''
         x,y, u,v = 0,1, 1,0
