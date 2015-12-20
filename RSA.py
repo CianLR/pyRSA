@@ -80,11 +80,11 @@ class RSA:
         
         return (p,q)
 
-    def encrypt(self, message):
-        return
+    def encrypt(self, message, pub_key, n):
+        return pow(message, pub_key, n)
 
     def decrypt(self, cypher):
-        return
+        return pow(cypher, self.private_key, self.n)
 
     def get_public_key(self):
         return
