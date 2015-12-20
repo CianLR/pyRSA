@@ -11,47 +11,21 @@ class RSA:
         
         totient = (p-1) * (q-1) 
         self.public_key = 65537
-
-        print totient
+        self.private_key = self.extended_euclidean(totient, self.public_key)
+        #print totient
         
-    def extended_euclidean(self, n, x):
-        n_for_mod = n
-        p0 = 0
-        p1 = 1
+    def extended_euclidean(self, totient, p):
+        '''
+        Returns the multiplicative inverse of p wrt n.
+        Adapted from: https://goo.gl/Zyh7T1
+        '''
+        x,y, u,v = 0,1, 1,0
+        while totient != 0:
+            q, r = p//totient, p%totient
+            m, n = x-u*q, y-v*q
+            p,totient, x,y, u,v = totient,r, u,v, m,n
 
-        q0 = n / x
-        n_mod_x = n % x
-        
-        n = x
-        x = n_mod_x
-        n_mod_x = n % x
-        q1 = n / x
-        print q1
-
-        while n_mod_x != 0:
-            temp = p0 - p1*(q0%n_for_mod)
-            p0 = p1
-            p1 = temp
-
-            n = x
-            x = n_mod_x
-            n_mod_x = n % x
-            q0 = q1
-            q1 = n / x
-            print q1, p1
-
-        temp = p0 - p1*(q0%n_for_mod)
-        p0 = p1
-        p1 = temp
-
-        n = x
-        x = n_mod_x
-        n_mod_x = n % x
-        q0 = q1
-        q1 = n / x
-        print q1, p1
-    
-        return p0 - p1*(q0%n_for_mod)
+        return y
             
     
     def rabin_miller_primality_test(self, n, iterations):
