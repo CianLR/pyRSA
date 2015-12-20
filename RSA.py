@@ -19,13 +19,14 @@ class RSA:
         Returns the multiplicative inverse of p wrt totient.
         Adapted from: https://goo.gl/Zyh7T1
         '''
+        original_totient = totient
         x,y, u,v = 0,1, 1,0
         while totient != 0:
             q, r = p//totient, p%totient
             m, n = x-u*q, y-v*q
             p,totient, x,y, u,v = totient,r, u,v, m,n
-
-        return y
+        
+        return y if y > 0 else y + original_totient
             
     
     def rabin_miller_primality_test(self, n, iterations):
