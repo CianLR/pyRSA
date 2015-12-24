@@ -91,6 +91,12 @@ class RSA:
     def decrypt(self, cypher):
         return pow(cypher, self.private_key, self.n)
 
+    def signed_hash(self, cypher, pub_key, n):
+        '''
+        Returns a decrypted hash used to verify a signed message.
+        '''
+        return pow(cypher, pub_key, n)
+
     def get_public_key(self):
         return
 
